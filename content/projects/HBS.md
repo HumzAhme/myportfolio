@@ -9,4 +9,5 @@ tech:
   - TypeScript
 company: 'Upstatement'
 showInProjects: false
+description: 'fsdffdffd'
 ---

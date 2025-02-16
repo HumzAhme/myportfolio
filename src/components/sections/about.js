@@ -144,17 +144,21 @@ const About = () => {
             <p>
               Hello! My name is HUMZA, a dynamic and unconventional thinker, dedicated to pushing
               boundaries and exploring innovative ideas. I have done{' '}
-              <a href="https://starry.com/">considerable projects </a>, and{' '}
-              <a href="https://www.apple.com/"> certifications</a>, in secure development & blue
-              team cybersecurity. My dedication to completing projects thoroughly, often working
+              <a href="/#projects">considerable projects </a>, and{' '}
+              <a href="/#certification"> certifications</a>, in secure development & blue team
+              cybersecurity. My dedication to completing projects thoroughly, often working
               tirelessly until they're finished, sets me apart. My rational thinking and analytical
               skills of approaching any problem, honed through critical research, have earned me
               recognition for my ability to devise solutions to incurring problems at-hand, making
               me adept at both qualitative and quantitative tasks.{' '}
-              <a href="https://starry.com/">My research</a>, in cybersecurity, AI, and their
-              potential impacts on societal aspects is my passion. Other than academics and career,
-              i am actively engaged in sports activities for whom I have done some{' '}
-              <a href="https://starry.com/"> volunteer work </a>, too.
+              <a href="#publication">My research</a>, in cybersecurity, AI, and their potential
+              impacts on societal aspects is my passion. Other than academics and career, i am
+              actively engaged in sports activities for whom I have done some{' '}
+              <a href="https://www.linkedin.com/in/humza-a-ahmed/details/volunteering-experiences/">
+                {' '}
+                volunteer work{' '}
+              </a>
+              , too.
             </p>
 
             <p>Here are a few technologies I’ve been working with recently:</p>

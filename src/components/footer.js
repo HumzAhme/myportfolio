@@ -106,8 +106,12 @@ const Footer = () => {
 
       <StyledCredit tabindex="-1">
         <a href="https://github.com/HumzAhme/myPortfolio">
-          <div>Designed &amp; Built via BC</div>
-
+          <div>
+            Designed &amp; Built with EFFORT
+            <span role="img" aria-label="computer keyboard">
+              💻
+            </span>
+          </div>
           {githubInfo.stars && githubInfo.forks && (
             <div className="github-stats">
               <span>

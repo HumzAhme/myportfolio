@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { navigate, useStaticQuery, graphql } from 'gatsby';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { srConfig } from '@config';
@@ -11,6 +11,7 @@ const StyledProjectsSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  scroll-margin-top: 100px; /* Adjust this value if you have a fixed header */
 
   h2 {
     font-size: clamp(24px, 5vw, var(--fz-heading));
@@ -19,9 +20,9 @@ const StyledProjectsSection = styled.section`
   .archive-link {
     font-family: var(--font-mono);
     font-size: var(--fz-sm);
-    &:after {
-      bottom: 0.1em;
-    }
+    /* This button now uses the same mixin as your 'more-button' */
+    ${({ theme }) => theme.mixins.button};
+    margin: 20px auto; /* Adjust margin as needed */
   }
 
   .projects-grid {
@@ -264,12 +265,18 @@ const Projects = () => {
   };
 
   return (
-    <StyledProjectsSection>
-      <h2 ref={revealTitle}>Other Noteworthy Projects</h2>
+    <StyledProjectsSection id="projects">
+      <h2 className="numbered-heading" ref={revealTitle}>
+        Noteworthy Projects & Certifications
+      </h2>
 
-      <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
-        view the archive
-      </Link>
+      <button
+        type="button"
+        className="archive-link"
+        onClick={() => navigate('/archive')}
+        ref={revealArchiveLink}>
+        view CERTIFICATIONS
+      </button>
 
       <ul className="projects-grid">
         {prefersReducedMotion ? (

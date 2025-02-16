@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
@@ -60,7 +60,7 @@ const StyledTableContainer = styled.div`
     }
 
     tr {
-      cursor: default;
+      cursor: pointer;
 
       td:first-child {
         border-top-left-radius: var(--border-radius);
@@ -89,11 +89,6 @@ const StyledTableContainer = styled.div`
         font-size: var(--fz-xl);
         font-weight: 600;
         line-height: 1.25;
-      }
-
-      &.company {
-        font-size: var(--fz-lg);
-        white-space: nowrap;
       }
 
       &.tech {
@@ -126,6 +121,16 @@ const StyledTableContainer = styled.div`
         }
       }
     }
+
+    /* Styles for the expandable description row */
+    .description-row {
+      background-color: var(--light-navy);
+      td {
+        padding: 10px 20px;
+        font-size: var(--fz-md);
+        color: var(--light-slate);
+      }
+    }
   }
 `;
 
@@ -135,6 +140,11 @@ const ArchivePage = ({ location, data }) => {
   const revealTable = useRef(null);
   const revealProjects = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const [expandedRows, setExpandedRows] = useState({});
+
+  const toggleRow = index => {
+    setExpandedRows(prev => ({ ...prev, [index]: !prev[index] }));
+  };
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -144,7 +154,7 @@ const ArchivePage = ({ location, data }) => {
     sr.reveal(revealTitle.current, srConfig());
     sr.reveal(revealTable.current, srConfig(200, 0));
     revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 10)));
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <Layout location={location}>
@@ -152,19 +162,19 @@ const ArchivePage = ({ location, data }) => {
 
       <main>
         <header ref={revealTitle}>
-          <h1 className="big-heading">Archive</h1>
-          <p className="subtitle">A big list of things I’ve worked on</p>
+          <h1 className="big-heading">Certifications</h1>
+          <p className="subtitle">A big list of Certifications I’ve done</p>
         </header>
 
         <StyledTableContainer ref={revealTable}>
           <table>
             <thead>
               <tr>
-                <th>Year</th>
-                <th>Title</th>
-                <th className="hide-on-mobile">Made at</th>
-                <th className="hide-on-mobile">Built with</th>
-                <th>Link</th>
+                <th>Date</th>
+                <th>License</th>
+                {/* "Made at" column removed */}
+                <th className="hide-on-mobile">Offered by</th>
+                <th>Verification</th>
               </tr>
             </thead>
             <tbody>
@@ -178,54 +188,60 @@ const ArchivePage = ({ location, data }) => {
                     android,
                     title,
                     tech,
-                    company,
+                    description, // new field from frontmatter
+                    //company,
                   } = node.frontmatter;
                   return (
-                    <tr key={i} ref={el => (revealProjects.current[i] = el)}>
-                      <td className="overline year">{`${new Date(date).getFullYear()}`}</td>
+                    <React.Fragment key={i}>
+                      <tr onClick={() => toggleRow(i)} ref={el => (revealProjects.current[i] = el)}>
+                        <td className="overline year">{`${new Date(date).getFullYear()}`}</td>
 
-                      <td className="title">{title}</td>
+                        <td className="title">{title}</td>
 
-                      <td className="company hide-on-mobile">
-                        {company ? <span>{company}</span> : <span>—</span>}
-                      </td>
+                        {/* Removed company cell (Made at) */}
+                        <td className="tech hide-on-mobile">
+                          {tech?.length > 0 &&
+                            tech.map((item, i) => (
+                              <span key={i}>
+                                {item}
+                                {i !== tech.length - 1 && (
+                                  <span className="separator">&middot;</span>
+                                )}
+                              </span>
+                            ))}
+                        </td>
 
-                      <td className="tech hide-on-mobile">
-                        {tech?.length > 0 &&
-                          tech.map((item, i) => (
-                            <span key={i}>
-                              {item}
-                              {''}
-                              {i !== tech.length - 1 && <span className="separator">&middot;</span>}
-                            </span>
-                          ))}
-                      </td>
-
-                      <td className="links">
-                        <div>
-                          {external && (
-                            <a href={external} aria-label="External Link">
-                              <Icon name="External" />
-                            </a>
-                          )}
-                          {github && (
-                            <a href={github} aria-label="GitHub Link">
-                              <Icon name="GitHub" />
-                            </a>
-                          )}
-                          {ios && (
-                            <a href={ios} aria-label="Apple App Store Link">
-                              <Icon name="AppStore" />
-                            </a>
-                          )}
-                          {android && (
-                            <a href={android} aria-label="Google Play Store Link">
-                              <Icon name="PlayStore" />
-                            </a>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
+                        <td className="links">
+                          <div>
+                            {external && (
+                              <a href={external} aria-label="External Link">
+                                <Icon name="External" />
+                              </a>
+                            )}
+                            {github && (
+                              <a href={github} aria-label="GitHub Link">
+                                <Icon name="GitHub" />
+                              </a>
+                            )}
+                            {ios && (
+                              <a href={ios} aria-label="Apple App Store Link">
+                                <Icon name="AppStore" />
+                              </a>
+                            )}
+                            {android && (
+                              <a href={android} aria-label="Google Play Store Link">
+                                <Icon name="PlayStore" />
+                              </a>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                      {expandedRows[i] && description && (
+                        <tr className="description-row">
+                          <td colSpan="4">{description}</td>
+                        </tr>
+                      )}
+                    </React.Fragment>
                   );
                 })}
             </tbody>
@@ -235,6 +251,7 @@ const ArchivePage = ({ location, data }) => {
     </Layout>
   );
 };
+
 ArchivePage.propTypes = {
   location: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
@@ -259,6 +276,7 @@ export const pageQuery = graphql`
             ios
             android
             company
+            description
           }
           html
         }
