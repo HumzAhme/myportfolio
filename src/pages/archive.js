@@ -91,16 +91,9 @@ const StyledTableContainer = styled.div`
         line-height: 1.25;
       }
 
-      &.tech {
-        font-size: var(--fz-xxs);
-        font-family: var(--font-mono);
-        line-height: 1.5;
-        .separator {
-          margin: 0 5px;
-        }
-        span {
-          display: inline-block;
-        }
+      &.company {
+        font-size: var(--fz-lg);
+        white-space: nowrap;
       }
 
       &.links {
@@ -122,7 +115,7 @@ const StyledTableContainer = styled.div`
       }
     }
 
-    /* Styles for the expandable description row */
+    /* Styles for the expandable detail row */
     .description-row {
       background-color: var(--light-navy);
       td {
@@ -150,7 +143,6 @@ const ArchivePage = ({ location, data }) => {
     if (prefersReducedMotion) {
       return;
     }
-
     sr.reveal(revealTitle.current, srConfig());
     sr.reveal(revealTable.current, srConfig(200, 0));
     revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 10)));
@@ -172,7 +164,6 @@ const ArchivePage = ({ location, data }) => {
               <tr>
                 <th>Date</th>
                 <th>License</th>
-                {/* "Made at" column removed */}
                 <th className="hide-on-mobile">Offered by</th>
                 <th>Verification</th>
               </tr>
@@ -187,30 +178,24 @@ const ArchivePage = ({ location, data }) => {
                     ios,
                     android,
                     title,
-                    tech,
-                    description, // new field from frontmatter
-                    //company,
+                    bookmark,
+                    folder,
+                    company,
                   } = node.frontmatter;
+                  const { html } = node;
+                  // Format the date to show abbreviated month and year
+                  const formattedDate = new Date(date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    year: 'numeric',
+                  });
                   return (
                     <React.Fragment key={i}>
                       <tr onClick={() => toggleRow(i)} ref={el => (revealProjects.current[i] = el)}>
-                        <td className="overline year">{`${new Date(date).getFullYear()}`}</td>
-
+                        <td className="overline year">{formattedDate}</td>
                         <td className="title">{title}</td>
-
-                        {/* Removed company cell (Made at) */}
-                        <td className="tech hide-on-mobile">
-                          {tech?.length > 0 &&
-                            tech.map((item, i) => (
-                              <span key={i}>
-                                {item}
-                                {i !== tech.length - 1 && (
-                                  <span className="separator">&middot;</span>
-                                )}
-                              </span>
-                            ))}
+                        <td className="company hide-on-mobile">
+                          {company ? <span>{company}</span> : <span>—</span>}
                         </td>
-
                         <td className="links">
                           <div>
                             {external && (
@@ -223,6 +208,18 @@ const ArchivePage = ({ location, data }) => {
                                 <Icon name="GitHub" />
                               </a>
                             )}
+
+                            {folder && (
+                              <a href={folder} aria-label="Folder">
+                                <Icon name="Folder" />
+                              </a>
+                            )}
+                            {bookmark && (
+                              <a href={bookmark} aria-label="Bookmark">
+                                <Icon name="Bookmark" />
+                              </a>
+                            )}
+
                             {ios && (
                               <a href={ios} aria-label="Apple App Store Link">
                                 <Icon name="AppStore" />
@@ -236,9 +233,9 @@ const ArchivePage = ({ location, data }) => {
                           </div>
                         </td>
                       </tr>
-                      {expandedRows[i] && description && (
+                      {expandedRows[i] && html && (
                         <tr className="description-row">
-                          <td colSpan="4">{description}</td>
+                          <td colSpan="4" dangerouslySetInnerHTML={{ __html: html }} />
                         </tr>
                       )}
                     </React.Fragment>
@@ -262,7 +259,7 @@ export default ArchivePage;
 export const pageQuery = graphql`
   {
     allMarkdownRemark(
-      filter: { fileAbsolutePath: { regex: "/content/projects/" } }
+      filter: { fileAbsolutePath: { regex: "/content/certifications/" } }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
       edges {
@@ -270,13 +267,13 @@ export const pageQuery = graphql`
           frontmatter {
             date
             title
-            tech
             github
             external
             ios
             android
+            bookmark
+            folder
             company
-            description
           }
           html
         }
