@@ -52,20 +52,20 @@ const Loader = ({ finishLoading }) => {
         easing: 'easeInOutQuart',
         strokeDashoffset: [anime.setDashoffset, 0],
       })
-      .add({
-        targets: '#logo #H',
-        duration: 700,
-        easing: 'easeInOutQuart',
-        opacity: 1,
-      })
-      .add({
-        targets: '#logo',
-        delay: 500,
-        duration: 300,
-        easing: 'easeInOutQuart',
-        opacity: 0,
-        scale: 0.1,
-      })
+      // .add({
+      //   targets: '#logo #H',
+      //   duration: 700,
+      //   easing: 'easeInOutQuart',
+      //   opacity: 1,
+      // })
+      // .add({
+      //   targets: '#logo',
+      //   delay: 500,
+      //   duration: 300,
+      //   easing: 'easeInOutQuart',
+      //   opacity: 0,
+      //   scale: 0.1,
+      // })
       .add({
         targets: '.loader',
         duration: 200,
