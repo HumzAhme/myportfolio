@@ -53,10 +53,28 @@ Yes, you can fork this repo. Please give me proper credit by linking back to [br
    yarn
    ```
 
+   OR (if dependency issue)
+
+   ```sh
+   yarn install --ignore-engines
+   ```
+
 4. Start the development server
 
    ```sh
    npm start
+   ```
+
+   2(only for GH-Pages deploy-script). Start the development server
+
+   ```sh
+   yarn deploy
+   ```
+
+   3(only for GH-Pages deploy-script). Start the development server
+
+   ```sh
+   npm run deploy
    ```
 
 ## 🚀 Building and Running for Production
