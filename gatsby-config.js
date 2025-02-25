@@ -1,7 +1,7 @@
 const config = require('./src/config');
 
 module.exports = {
-  pathPrefix: "/", // other configuration
+  pathPrefix: "/myPortfolio", // other configuration
   siteMetadata: {
     title: 'Humza Asrar A',
     description:

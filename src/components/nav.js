@@ -8,6 +8,8 @@ import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
 import { IconLogo, IconHex } from '@components/icons';
+import { withPrefix } from 'gatsby';
+
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -208,10 +210,15 @@ const Nav = ({ isHome }) => {
 
 
   const ResumeLink = (
-    <a className="resume-button" href={`/myPortfolio/resume.pdf`} target="_blank" rel="noopener noreferrer">
+    <a className="resume-button" href={withPrefix('/resume.pdf')} target="_blank" rel="noopener noreferrer">
       Resume
     </a>
   );
+
+
+  
+
+
 
   return (
     <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
