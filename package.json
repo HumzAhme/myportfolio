@@ -13,7 +13,7 @@
   "license": "MIT",
   "browserslist": "> 0.25%, not dead",
   "scripts": {
-    "build": "gatsby build",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
@@ -21,7 +21,7 @@
     "clean": "gatsby clean",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "deploy": "gatsby build && gh-pages -d public"
+    "deploy": "gatsby build && touch public/.nojekyll && gh-pages -d public"
   },
   "lint-staged": {
     "*.{js,css,json,md}": [
@@ -77,5 +77,7 @@
     "husky": "^6.0.0",
     "lint-staged": "^10.1.2",
     "prettier": "^2.2.1"
+    "cross-env": "^7.0.3",
+
   }
 }
