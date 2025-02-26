@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { navLinks } from '@config';
 import { KEY_CODES } from '@utils';
 import { useOnClickOutside } from '@hooks';
+import { withPrefix } from 'gatsby';
 
 const StyledMenu = styled.div`
   display: none;
@@ -266,7 +267,7 @@ const Menu = () => {
               </ol>
             )}
 
-            <a href="/resume.pdf" className="resume-link">
+            <a href={withPrefix('/resume.pdf')} className="resume-link">
               Resume
             </a>
           </nav>
