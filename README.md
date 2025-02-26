@@ -1,11 +1,11 @@
 <div align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/humzahme/myPortfolio/main/src/images/logo.png" width="100" />
+  <img alt="Logo" src="https://raw.githubusercontent.com/humzahme/myportfolio/main/src/images/logo.png" width="100" />
 </div>
 <h1 align="center">
   humza.eu - portfolio
 </h1>
 <p align="center">
-  The fourth iteration of <a href="https://humza.eu" target="_blank">humza.eu</a> built with <a href="https://www.gatsbyjs.org/" target="_blank">Gatsby</a> and hosted with <a href="https://www.humzahme.github.io/myPortfolio" target="_blank">GH Pages</a>
+  The fourth iteration of <a href="https://humza.eu" target="_blank">humza.eu</a> built with <a href="https://www.gatsbyjs.org/" target="_blank">Gatsby</a> and hosted with <a href="https://humzahme.github.io/myportfolio" target="_blank">PORTFOLIO WEBSITE</a>
 </p>
 <p align="center">
   Previous iterations:
@@ -14,12 +14,12 @@
   <a href="https://github.com/bchiang7/bchiang7.github.io" target="_blank">v3</a>
 </p>
 <p align="center">
-  <a href="https://humzahme.github.io/myPortfolio" target="_blank">
+  <a href="https://humzahme.github.io/myportfolio" target="_blank">
     <img src="https://api.netlify.com/api/v1/badges/1963b488-7b78-48c9-9e2d-6fb5e47ab3af/deploy-status" alt="Netlify Status" />
   </a>
 </p>
 
-![demo](https://raw.githubusercontent.com/humzahme/myPortfolio/main/src/images/demo.png)
+![demo](https://raw.githubusercontent.com/humzahme/myportfolio/main/src/images/demo.png)
 
 ## 🚨 Forking this repo (please read!)
 
