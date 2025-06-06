@@ -3,7 +3,7 @@ date: '7'
 title: 'MediScan: AI-Powered RCNN BASED and NLP for Medical Receipt Digitization and Analysis'
 #cover: './halcyon.png'
 #github: 'https://github.com/'
-overline: 'Journal | June 2025'
+overline: 'Journal | in progress'
 external: './#publication' #external link icon
 #cta: './#publication' #learn more button
 tech:

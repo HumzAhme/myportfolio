@@ -5,7 +5,7 @@ title: 'Smishing Detection leveraging Bert and Deep Learning Models'
 #github: 'https://github.com/'
 external: './#publication' #external link icon
 #cta: './#publication' #learn more button
-overline: 'Journal | May 2025'
+overline: 'Journal | in-progress'
 
 tech:
   -
