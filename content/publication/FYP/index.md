@@ -5,7 +5,7 @@ title: 'AI-driven Sentiment and Emotional Analysis Framework for Multimedia Cont
 #github: 'https://github.com/'
 external: './#publication' #external link icon
 #cta: './#publication' #learn more button
-overline: 'Journal | Sept 2025'
+overline: 'Journal | in-progress'
 tech:
   -
   -
